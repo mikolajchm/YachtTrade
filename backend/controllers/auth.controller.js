@@ -12,7 +12,7 @@ exports.register = async (req, res) => {
         return res.status(409).send({ message: 'User with this login already exist' });
       }
 
-      const user = await User.create({ login, password: await bcrypt.hash(password, 10) });
+      const user = await User.create({ login, password: await bcrypt.hash(password, 12) });
       res.status(201).send({ message: 'User created ' + user.login })
     } else {
       res.status(400).send({ message: 'Bad request' });
@@ -34,6 +34,7 @@ exports.login = async (req, res) => {
         res.status(400).send({ message: 'Login or password is incorrect' });
       } else {
         if(bcrypt.compareSync(password, user.password)) {
+          req.session.login = user.login;
           res.status(200).send({ message: 'Login succesfull' });
         } else {
           res.status(400).send({ message: 'Login or password is incorrect' });
