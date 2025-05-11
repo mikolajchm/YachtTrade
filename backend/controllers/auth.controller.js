@@ -67,8 +67,8 @@ exports.logout = async (req, res) => {
       if (process.env.NODE_ENV !== "production") {
         try {
           await Session.deleteMany({});
-        } catch (dbError) {
-          return res.status(500).send({ message: 'Error clearing sessions: ' + dbError.message });
+        } catch (err) {
+          return res.status(500).send({ message: err.message });
         }
       }
 

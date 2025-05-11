@@ -4,7 +4,7 @@ const authMiddleware = async (req, res, next) => {
   if (process.env.NODE_ENV !== "production") {
 
     try {
-      
+
       const sessionRecord = await Session.findOne({});
 
      
@@ -28,7 +28,7 @@ const authMiddleware = async (req, res, next) => {
     if (req.session.user) {
       next();
     } else {
-      res.status(401).send({ message: 'You are not authorized' });
+      return res.status(401).send({ message: 'You are not authorized' });
     }
   }
 };
