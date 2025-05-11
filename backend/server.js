@@ -22,7 +22,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({ 
-  secret: 'xyz567',
+  secret: process.env.secret,
   store: MongoStore.create({
     mongoUrl: 'mongodb://0.0.0.0:27017/YachtTrade',
     collectionName: 'sessions',

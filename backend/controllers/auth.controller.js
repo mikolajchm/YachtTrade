@@ -1,5 +1,6 @@
-const User = require('../models/User.model');
+const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
+
 
 exports.register = async (req, res) => {
   try {
@@ -23,17 +24,18 @@ exports.register = async (req, res) => {
   }
 }
 
+
 exports.login = async (req, res) => {
   try {
     const { login, password } = req.body;
-    if(login && typeof login === 'string' && password && typeof password === 'string') {
+    if (login && typeof login === 'string' && password && typeof password === 'string') {
 
       const user = await User.findOne({ login });
 
-      if(!user) {
-        res.status(400).send({ message: 'Login or password is incorrect' });
+      if (!user) {
+        return res.status(400).send({ message: 'Login or password is incorrect' });
       } else {
-        if(bcrypt.compareSync(password, user.password)) {
+        if (bcrypt.compareSync(password, user.password)) {
           req.session.login = user.login;
           res.status(200).send({ message: 'Login succesfull' });
         } else {
@@ -48,4 +50,9 @@ exports.login = async (req, res) => {
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
+}
+
+
+exports.user = async (req, res) => {
+  res.send({ message: 'Yeah you are authorized' });
 }
