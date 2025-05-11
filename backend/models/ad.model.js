@@ -15,6 +15,7 @@ const adSchema = new mongoose.Schema({
   photo: { type: [String], required: true },
   price: { type: Number, min: 0, required: true },
   location: { type: String, required: true },
+  phoneNumber: { type: Number, required: true },
   sellerInfo: { type: String, required: true }
 });
 
