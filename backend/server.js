@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const path = require('node:path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const passportConfig = require('./config/passport');
+const passport = require('passport');
 
 const authRoutes = require('./routes/auth.routes');
+const adsRoutes = require('./routes/ads.routes');
 
 const app = express();
 
@@ -37,10 +38,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 app.use('/api/auth', authRoutes);
+app.use('/api/ads', adsRoutes);
 
 app.use('/', (req, res) => {
   res.status(404).render('notFound');

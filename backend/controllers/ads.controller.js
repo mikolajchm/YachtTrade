@@ -34,9 +34,9 @@ exports.postAd = async (req, res) => {
   try {
 
     const requiredFields = [
-      'title', 'description', 'publishedDate', 'make', 'condition',
+      'title', 'description', 'make', 'condition',
       'year', 'typeOfFuel', 'engineCapacity', 'horseOfPower',
-      'mth', 'countryOfOrigin', 'photos', 'location',
+      'mth', 'countryOfOrigin', 'location',
       'phoneNumber', 'sellerInfo'
     ];
 
@@ -46,16 +46,36 @@ exports.postAd = async (req, res) => {
       }
     }
 
-    const newAd = { ...req.body };
-    
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).send({ message: 'Missing photos' });
+    }
+
+    const invalidFiles = req.files.filter(file => {
+      const [, ext] = file.originalname.split('.');
+      return !['jpg', 'jpeg', 'png'].includes(ext.toLowerCase());
+    });
+
+    if (invalidFiles.length > 0) {
+      for (const file of req.files) {
+        fs.unlinkSync(file.path);
+      }
+      return res.status(400).send({ message: 'Photo must be a jpg, jpeg or png file type!' });
+    }
+
+    const newAd = {
+      ...req.body,
+      photos: req.files.map(file => file.filename)
+    };
+
     const newad = new Ad(newAd);
     await newad.save();
 
-    res.status(201).send({ message: 'Created !' });
+    res.status(201).send({ message: 'Created!' });
+
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
-}
+};
 
 
 exports.deleteAd = async (req, res) => {

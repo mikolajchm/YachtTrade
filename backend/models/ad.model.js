@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const adSchema = new mongoose.Schema({
   title: { type: String, minLength: 5, maxLength: 15, required: true },
   description: { type: String, minLength: 20, maxLength: 1000 ,required: true },
-  publishedDate: { type: Date, default: Date.now, required: true },
+  publishedDate: { type: Date, default: Date.now },
   make: { type: String, require: true },
   condition: { type: String, require: true },
   year: { type: Number, min: 1900, max: 2025, require: true },

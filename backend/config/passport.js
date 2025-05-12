@@ -4,8 +4,8 @@ const User = require('../models/user.model');
 
 passport.use(new GoogleStrategy({
   clientID: process.env.clientID,
-  clientSecret: proces.env.clientSecret,
-  callbackURL: proces.env.callbackURL
+  clientSecret: process.env.clientSecret,
+  callbackURL: process.env.callbackURL
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     const email = profile.emails[0].value;
@@ -14,7 +14,7 @@ passport.use(new GoogleStrategy({
     if (!user) {
       user = await User.create({
         login: email,
-        password: null,
+        password: '',
         googleId: profile.id,
       });
     }
