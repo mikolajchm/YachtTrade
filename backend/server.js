@@ -45,7 +45,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/ads', adsRoutes);
 
 app.use('/', (req, res) => {
-  res.status(404).render('notFound');
+  res.status(404).send('notFound');
 });
 
 app.listen('8000', () => {

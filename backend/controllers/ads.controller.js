@@ -1,11 +1,10 @@
 const fs = require('fs');
 const path = require('node:path');
-
 const Ad = require('../models/ad.model');
 
 exports.allAds = async (req, res) => {
   try {
-
+ 
     return res.json(await Ad.find({}));
 
   } catch (err) {
@@ -17,7 +16,7 @@ exports.allAds = async (req, res) => {
 exports.getById = async (req, res) => {
   try {
 
-    const ad = await Ad.findById({ _id: req.params.id });
+    const ad = await Ad.findById( req.params.id );
 
     if (ad) {
       return res.json(ad);
@@ -98,7 +97,26 @@ exports.deleteAd = async (req, res) => {
 
 exports.putAd = async (req, res) => {
   try {
+    const ad = await Ad.findById(req.params.id);
 
+    if (!ad) {
+      return res.status(404).send({ message: 'Ad not found' });
+    }
+
+    if (req.files && req.files.length > 0) {
+      for (const filename of ad.photos) {
+        const filepath = path.join(__dirname, '../public/uploads', filename);
+        if (fs.existsSync(filepath)) {
+          fs.unlinkSync(filepath);
+        }
+      }
+      ad.photos = req.files.map(file => file.filename);
+    }
+
+    Object.assign(ad, req.body);
+
+    await ad.save();
+    res.status(200).send({ message: 'Ad updated successfully' });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -109,7 +127,7 @@ exports.getSearchPharse = async (req, res) => {
   try {
 
     const searchPharse = req.params.searchPharse;
-    const searchScore = await Ads.find( { title: { $regex: searchPharse}});
+    const searchScore = await Ad.find( { title: { $regex: searchPharse}});
 
     if (!searchPharse) {
       return res.status(404).send({ message: 'Ad not found' });
