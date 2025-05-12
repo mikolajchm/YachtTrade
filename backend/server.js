@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const path = require('node:path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const passportConfig = require('./config/passport');
 
 const authRoutes = require('./routes/auth.routes');
 
@@ -33,6 +34,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use(express.static(path.join(__dirname, '/public')));
 
