@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 app.use('/api/auth', authRoutes);
-app.use('/api/ads', adsRoutes);
+app.use('/api', adsRoutes);
 
 app.use('/', (req, res) => {
   res.status(404).send('notFound');

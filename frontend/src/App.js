@@ -1,9 +1,22 @@
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+
 const App = () => {
+  const location = useLocation();
+  const isFluid = ['/ad'].includes(location.pathname);
+
   return (
-    <div className="App">
-      <h1>YachtTrade</h1>
-    </div>
+    <main>
+      <NavBar />
+      <Container fluid={isFluid}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/ad" element={<SingleAd />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Container>
+    </main>
   );
-}
+};
 
 export default App;

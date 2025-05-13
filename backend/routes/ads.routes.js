@@ -5,11 +5,11 @@ const imageUpload = require('../utils/imageUpload');
 
 const ads = require('../controllers/ads.controller');
 
-router.get('/', ads.allAds);
-router.get('/:id', ads.getById);
-router.post('/', authMiddleware, imageUpload.array('photos', 3), ads.postAd);
-router.delete('/:id', authMiddleware, ads.deleteAd);
-router.put('/:id', authMiddleware, imageUpload.array('photos', 3), ads.putAd);
-router.get('/search/:searchPharse', ads.getSearchPharse);
+router.get('/ads', ads.allAds);
+router.get('/ads/:id', ads.getById);
+router.post('/ads', authMiddleware, imageUpload.array('photos', 3), ads.postAd);
+router.delete('/ads/:id', authMiddleware, ads.deleteAd);
+router.put('/ads/:id', authMiddleware, imageUpload.array('photos', 3), ads.putAd);
+router.get('/ads/search/:searchPharse', ads.getSearchPharse);
 
 module.exports = router;
