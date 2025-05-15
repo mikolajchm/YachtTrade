@@ -116,7 +116,7 @@ const Register = () => {
 
       <Row className="justify-content-center">
         <Col xxl={5} xl={5} lg={6} md={6}>
-        
+          <h1 className="my-5">Register</h1>
           <Form.Group className="mb-3" controlId="formName">
             <Form.Label>FirstName :</Form.Label>
             <Form.Control

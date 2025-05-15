@@ -59,7 +59,11 @@ exports.login = async (req, res) => {
 
 
 exports.user = async (req, res) => {
-  res.send( req.session.user );
+  if (req.session.user) {
+    res.send(req.session.user);
+    res.status(200);
+  } 
+  res.send(500);
 }
 
 
