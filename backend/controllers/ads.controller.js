@@ -37,7 +37,7 @@ exports.postAd = async (req, res) => {
       'title', 'description', 'make', 'condition',
       'year', 'typeOfFuel', 'engineCapacity', 'horseOfPower',
       'mth', 'countryOfOrigin', 'location',
-      'phoneNumber', 'sellerInfo'
+      'phoneNumber'
     ];
 
     for (const field of requiredFields) {
@@ -64,7 +64,8 @@ exports.postAd = async (req, res) => {
 
     const newAd = {
       ...req.body,
-      photos: req.files.map(file => file.filename)
+      photos: req.files.map(file => file.filename),
+      sellerInfo: req.session.user.id
     };
 
     const newad = new Ad(newAd);
