@@ -1,5 +1,3 @@
-import shortid from 'shortid';
-
 export const getAllAds = ({ ads }) => ads;
 export const getAdById = ({ ads }, id) => ads.find(ad => ad._id === id);
 
@@ -18,7 +16,7 @@ export const clearAds = () => ({ type: CLEAR_ADS });
 const adsReducer = (statePart = [], action) => {
   switch (action.type) {
     case 'ADD_AD':
-      return [...statePart, { ...action.payload, _id: shortid() }];
+      return [...statePart, { ...action.payload }];
     case 'EDIT_AD':
       return statePart.map(ad => ad._id === action.payload._id ? { ...ad, ...action.payload } : ad );
     case 'DELETE_AD':

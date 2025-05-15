@@ -5,6 +5,7 @@ const path = require('node:path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('passport');
+const passportConfig = require('./config/passport');
 
 const authRoutes = require('./routes/auth.routes');
 const adsRoutes = require('./routes/ads.routes');

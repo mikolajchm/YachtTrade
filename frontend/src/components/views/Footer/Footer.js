@@ -1,7 +1,9 @@
+import styles from './Footer.module.scss';
+
 const Footer = () => {
   return (
-    <div>
-      <h1>Footer</h1>
+    <div className={styles.footer}>
+      <h1>Copyright © YachtTrade 2025</h1>
     </div>
   )
 };
