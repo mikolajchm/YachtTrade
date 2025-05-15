@@ -1,0 +1,36 @@
+.div {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.divchld {
+  padding: 0.5rem 1rem;
+  background-color: #dcdcdc;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  width: 100%;
+  max-width: 55rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.cardImg {
+  height: 220px;
+  object-fit: cover;
+}
+
+.button {
+  margin-top: auto;
+  align-self: center;
+}
