@@ -19,6 +19,8 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState(null);
@@ -42,6 +44,8 @@ const Register = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        firstName,
+        lastName,
         login,
         password
       }),
@@ -73,7 +77,7 @@ const Register = () => {
       {status === "success" && (
         <Alert variant="success">
             <Alert.Heading>Success!</Alert.Heading>
-            <p>You have been successfully registered!</p>
+            <p>You have been successfully registered. Now you can login!</p>
         </Alert>
       )}
 
@@ -113,6 +117,26 @@ const Register = () => {
       <Row className="justify-content-center">
         <Col xxl={5} xl={5} lg={6} md={6}>
         
+          <Form.Group className="mb-3" controlId="formName">
+            <Form.Label>FirstName :</Form.Label>
+            <Form.Control
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="Enter FirstName"
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formLastName">
+            <Form.Label>LastName :</Form.Label>
+            <Form.Control
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Enter LastName"
+            />
+          </Form.Group>
+
           <Form.Group className="mb-3" controlId="formLogin">
             <Form.Label>Login :</Form.Label>
             <Form.Control
