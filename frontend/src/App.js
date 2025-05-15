@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/ad/add" element={<AddAd />} />
           <Route path="/ad/edit/:id" element={<EditAd />} />
           <Route path="/ad/remove/:id" element={<RemoveAd />} />
-          <Route path="/search/:searchPharse" element={<Search />} />
+          <Route path="/search/:searchPharse" element={<SingleAd />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/logout" element={<Logout />} />

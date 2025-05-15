@@ -1,21 +1,32 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom';
+import { getUser } from '../../../redux/userRedux';
+import { useSelector } from 'react-redux';
 
 const NavBar = () => {
+
+  const user = useSelector(getUser);
+
   return (
     <Navbar bg="primary" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="/">YachtTrade</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">YachtTrade</Navbar.Brand>
         <Nav className="justify-content-end">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/register">Sign up</Nav.Link>
-          <Nav.Link href="/login">LogIn</Nav.Link>
-          <Nav.Link href="/logout">LogOut</Nav.Link>
+          <Nav.Link as={Link} to="/">Home</Nav.Link>
+          {user ? (
+            <Nav.Link as={Link} to="/logout">LogOut</Nav.Link>
+          ) : (
+            <>
+              <Nav.Link as={Link} to="/login">LogIn</Nav.Link>
+              <Nav.Link as={Link} to="/register">Sign up</Nav.Link>
+            </>
+          )}
         </Nav>
       </Container>
     </Navbar>
-  )
+  );
 };
 
 export default NavBar;

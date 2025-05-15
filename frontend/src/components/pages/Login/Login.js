@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 const Login = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
