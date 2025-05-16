@@ -21,7 +21,10 @@ const App = () => {
 
   const dispatch = useDispatch();
   const location = useLocation();
-  const isFluid = ['/', '/ad', '*'].includes(location.pathname);
+  const isFluid =
+  location.pathname === '/' ||
+  /^\/ad\/[^/]+$/.test(location.pathname) || 
+  location.pathname === '*';
 
   useEffect(() => {
     

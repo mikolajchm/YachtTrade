@@ -43,21 +43,31 @@ const Login = () => {
       })
     };
 
+    const option = {
+      method: 'GET',
+    };
+
     setStatus('loading');
+    
     fetch(`${API_URL}/auth/login`, options)
-      .then(res => {
-        if (res.status === 200) {
-          setStatus('success');
-          dispatch(logIn({ login }));
-        } else if (res.status === 400) {
-          setStatus('clientError');
-        } else {
-          setStatus('serverError');
-        }
-      })
-      .catch(err => {
+    .then(res => {
+      if (res.status === 200) {
+        setStatus('success');
+        return fetch(`${API_URL}/auth/user`, option)
+          .then(res => res.json())
+          .then(data => dispatch(logIn(data)));
+      } else if (res.status === 400) {
+        setStatus('clientError');
+        throw new Error('Client Error');
+      } else {
         setStatus('serverError');
-      })
+        throw new Error('Server Error');
+      }
+    })
+    .catch(err => {
+      setStatus('serverError');
+      console.error(err);
+    });
 
   }
 
