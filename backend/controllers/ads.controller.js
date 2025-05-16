@@ -70,8 +70,11 @@ exports.postAd = async (req, res) => {
 
     const newad = new Ad(newAd);
     await newad.save();
-
-    res.status(201).send({ message: 'Created!' });
+    
+    res.status(201).send({
+      message: 'Created!',
+      photos: newad.photos
+    });
 
   } catch (err) {
     res.status(500).send({ message: err.message });

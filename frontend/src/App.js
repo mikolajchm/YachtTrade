@@ -5,7 +5,6 @@ import Home from './components/pages/Home/Home';
 import SingleAd from './components/pages/SingleAd/SingleAd';
 import AddAd from './components/pages/AddAd/AddAd';
 import EditAd from './components/pages/EditAd/EditAd';
-import RemoveAd from './components/pages/RemoveAd/RemoveAd';
 import Search from './components/pages/Search/Search';
 import Login from './components/pages/Login/Login';
 import Register from './components/pages/Register/Register';
@@ -44,9 +43,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/ad/:id" element={<SingleAd />} />
-          <Route path="/ad/add" element={<AddAd />} />
+          <Route path="/ad/add/ad" element={<AddAd />} />
           <Route path="/ad/edit/:id" element={<EditAd />} />
-          <Route path="/ad/remove/:id" element={<RemoveAd />} />
           <Route path="/search/:searchPharse" element={<SingleAd />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

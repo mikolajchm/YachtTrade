@@ -16,7 +16,7 @@ const Home = () => {
     <Row xs={1} md={1} xl={3} lg={2} xxl={3} className="g-5 m-auto">
       {ads.map(ad => (
         <Col key={ad._id} className="d-flex justify-content-center">
-          <Card key={ad._id} className={styles.card}>
+          <Card className={styles.card}>
             <Carousel>
               {ad.photos.map(photo => (
                 <Carousel.Item key={photo}>

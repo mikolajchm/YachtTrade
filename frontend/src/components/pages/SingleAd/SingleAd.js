@@ -6,12 +6,44 @@ import styles from './SingleAd.module.scss';
 import { getUser } from "../../../redux/userRedux";
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router";
+import Modal from 'react-bootstrap/Modal';
+import { API_URL } from '../../../config';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { deleteAd } from "../../../redux/adsRedux";
 
 const SingleAd = () => {
 
   const { id } = useParams();
   const ad = useSelector(state => getAdById(state, id));
   const user = useSelector(getUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleRemove = (e) => {
+    e.preventDefault(); 
+    
+    const options = {
+      method: 'DELETE',
+    };
+
+    fetch(`${API_URL}/ads/${id}`, options)
+      .then((res) => {
+        if (res.status === 200) {
+          setShow(false);
+          dispatch(deleteAd(id));
+          navigate("/");
+        } else {
+          console.log('Remove failed');
+        }
+      });
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -58,7 +90,23 @@ const SingleAd = () => {
           { user && user.id === ad.sellerInfo ? (
             <>
               <Button as={Link} to={`/ad/edit/${ad._id}`} variant="success">Edit Ad</Button>
-              <Button as={Link} to={`/ad/remove/${ad._id}`} variant="danger">Delete Ad</Button>
+              <Button  className="ms-3" variant="danger" onClick={handleShow}> 
+                Delete 
+              </Button>
+              <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                      <Modal.Title>Are you sure?</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>This operation is irreversible. Do you want to proceed?</Modal.Body>
+                  <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                          Close
+                      </Button>
+                      <Button variant="danger" onClick={handleRemove}> 
+                          Remove
+                      </Button>
+                  </Modal.Footer>
+              </Modal>
             </>
           ) : (<></>)}
         </div>

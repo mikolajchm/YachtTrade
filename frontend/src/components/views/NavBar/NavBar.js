@@ -16,7 +16,10 @@ const NavBar = () => {
         <Nav className="justify-content-end">
           <Nav.Link as={Link} to="/">Home</Nav.Link>
           {user ? (
-            <Nav.Link as={Link} to="/logout">LogOut</Nav.Link>
+            <>
+              <Nav.Link as={Link} to="/ad/add/ad">Add Ad</Nav.Link>
+              <Nav.Link as={Link} to="/logout">LogOut</Nav.Link>
+            </>
           ) : (
             <>
               <Nav.Link as={Link} to="/login">LogIn</Nav.Link>
