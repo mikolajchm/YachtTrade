@@ -146,7 +146,7 @@ exports.getSearchPharse = async (req, res) => {
 
     const searchPhrase = req.params.searchPharse;
     const ads = await Ad.find({
-      make: { $regex: searchPhrase, $options: 'i' } // ignoruj wielkość liter
+      make: { $regex: searchPhrase, $options: 'i' } 
     });
 
     if (!ads.length) {
