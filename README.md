@@ -20,9 +20,11 @@ Built as a portfolio project to demonstrate full‑stack skills (design, securit
 |--------------------------|------------|
 | **Home**                 | ![](docs/screenshots/home-page.png) |
 | **Single Ad**            | ![](docs/screenshots/singleAd-page.png) |
+| **Register page**        | ![](docs/screenshots/register-page.png) |
+| **Login page**           | ![](docs/screenshots/login-page.png) |
 | **Edit Ad**              | ![](docs/screenshots/editAd-page.png) |
 | **Delete confirmation**  | ![](docs/screenshots/remove-operation.png) |
-| **Unauthorized access**  | ![](docs/screenshots/notauthorizationsingleAd-page.png) |
+| **Unauthorized access**  | ![](docs/screenshots/noauthorizationsingleAd-page.png) |
 
 > *Video walk‑through soon…*
 
