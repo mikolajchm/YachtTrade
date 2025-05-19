@@ -69,7 +69,7 @@ const AddAd = () => {
 
       <Form.Group className="mb-3" controlId="formTitle">
         <Form.Label>Title</Form.Label>
-        <Form.Control minLength={5} maxLength={15} type="text" value={title} onChange={e => setTitle(e.target.value)} required/>
+        <Form.Control minLength={5} maxLength={50} type="text" value={title} onChange={e => setTitle(e.target.value)} required/>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formMake">
