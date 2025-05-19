@@ -5,10 +5,6 @@
 # YachtTrade ⛵️  
 > **MERN Stack • CRUD • Multer upload • Regex search**
 
-![badge-node](https://img.shields.io/badge/Node-20.x-green)
-![badge-react](https://img.shields.io/badge/React-19.x-blue)
-![badge-license](https://img.shields.io/badge/License-MIT-lightgrey)
-
 Marketplace for yachts and watercrafts: list, search, sell, manage.  
 Built as a portfolio project to demonstrate full‑stack skills (design, security, CI/CD).
 
@@ -26,7 +22,7 @@ Built as a portfolio project to demonstrate full‑stack skills (design, securit
 | **Delete confirmation**  | ![](docs/screenshots/remove-operation.png) |
 | **Unauthorized access**  | ![](docs/screenshots/noauthorizationsingleAd-page.png) |
 
-> *Video walk‑through soon…*
+
 
 ---
 
