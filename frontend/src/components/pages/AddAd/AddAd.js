@@ -54,33 +54,14 @@ const AddAd = () => {
     fetch(`${API_URL}/ads`, options)
       .then(res => {
         if (res.status === 201) {
-          return res.json();
+          navigate('/');
         } else {
           throw new Error(`Unexpected response status: ${res.status}`);
         }
       })
-      .then(data => {
-        const ad = {
-          title,
-          description,
-          make,
-          condition,
-          year,
-          typeOfFuel,
-          engineCapacity,
-          horseOfPower,
-          mth,
-          countryOfOrigin,
-          photos: data.photos, 
-          price,
-          location,
-          phoneNumber
-        };
-        dispatch(addAd(ad));
-        navigate('/');
-      })
       .catch(err => console.error('Error:', err));
-      };
+  };
+
 
   return (
     <Form onSubmit={handleSubmit}>

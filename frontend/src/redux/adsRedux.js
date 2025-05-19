@@ -22,9 +22,9 @@ const adsReducer = (statePart = [], action) => {
     case ADD_AD:
       return [...statePart, { ...action.payload }];
     case EDIT_AD:
-      return statePart.map(ad => ad._id === action.payload._id ? { ...ad, ...action.payload } : ad );
+      return statePart.map(ad => ad._id === action.payload.id ? { ...ad, ...action.payload } : ad );
     case DELETE_AD:
-      return statePart.filter(ad => ad._id !== action.payload._id);
+      return statePart.filter(ad => ad._id !== action.payload);
     case CLEAR_ADS:
       return [];
     default:

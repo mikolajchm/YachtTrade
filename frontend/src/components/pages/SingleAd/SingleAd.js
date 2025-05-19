@@ -30,7 +30,7 @@ const SingleAd = () => {
     e.preventDefault(); 
     
     const options = {
-      method: 'DELETE',
+      method: 'DELETE'
     };
 
     fetch(`${API_URL}/ads/${id}`, options)
@@ -45,74 +45,78 @@ const SingleAd = () => {
       });
   };
 
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.carousel}>
-        <Carousel>
-          {ad.photos.map((photo, index) => (
-            <Carousel.Item key={index}>
-              <img
-                src={`http://localhost:8000/uploads/${photo}`}
-                alt={`Slide ${index + 1}`}
-                className={styles.carouselImg}
-              />
-            </Carousel.Item>
-          ))}
-        </Carousel>
+  if (!ad) {
+    navigate('/');
+  } else {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.carousel}>
+          <Carousel>
+            {ad.photos.map((photo, index) => (
+              <Carousel.Item key={index}>
+                <img
+                  src={`http://localhost:8000/uploads/${photo}`}
+                  alt={`Slide ${index + 1}`}
+                  className={styles.carouselImg}
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </div>
+
+        <div className={styles.details}>
+          <h1 className={styles.title}>{ad.title}</h1>
+          <h2 className={styles.make}>{ad.make}</h2>
+
+          <div className={styles.grid}>
+            <div><strong>Price:</strong> ${ad.price}</div>
+            <div><strong>Year:</strong> {ad.year}</div>
+            <div><strong>Fuel:</strong> {ad.typeOfFuel}</div>
+            <div><strong>Horsepower:</strong> {ad.horseOfPower} HP</div>
+            <div><strong>Engine Capacity:</strong> {ad.engineCapacity} cm³</div>
+            <div><strong>MTH:</strong> {ad.mth}</div>
+            <div><strong>Condition:</strong> {ad.condition}</div>
+            <div><strong>Origin:</strong> {ad.countryOfOrigin}</div>
+            <div><strong>Location:</strong> {ad.location}</div>
+          </div>
+
+          <div className={styles.description}>
+            <h3>Description:</h3>
+            <p>{ad.description}</p>
+          </div>
+
+          <div className={styles.contact}>
+            <h4>Contact seller:</h4>
+            <p>Phone: <strong>{ad.phoneNumber}</strong></p>
+          </div>
+          <div className={styles.admin}>
+            { user && user.id === ad.sellerInfo ? (
+              <>
+                <Button as={Link} to={`/ad/edit/${ad._id}`} variant="success">Edit Ad</Button>
+                <Button  className="ms-3" variant="danger" onClick={handleShow}> 
+                  Delete 
+                </Button>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Are you sure?</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>This operation is irreversible. Do you want to proceed?</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="danger" onClick={handleRemove}> 
+                            Remove
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+              </>
+            ) : (<></>)}
+          </div>
+        </div>
       </div>
-
-      <div className={styles.details}>
-        <h1 className={styles.title}>{ad.title}</h1>
-        <h2 className={styles.make}>{ad.make}</h2>
-
-        <div className={styles.grid}>
-          <div><strong>Price:</strong> ${ad.price}</div>
-          <div><strong>Year:</strong> {ad.year}</div>
-          <div><strong>Fuel:</strong> {ad.typeOfFuel}</div>
-          <div><strong>Horsepower:</strong> {ad.horseOfPower} HP</div>
-          <div><strong>Engine Capacity:</strong> {ad.engineCapacity} cm³</div>
-          <div><strong>MTH:</strong> {ad.mth}</div>
-          <div><strong>Condition:</strong> {ad.condition}</div>
-          <div><strong>Origin:</strong> {ad.countryOfOrigin}</div>
-          <div><strong>Location:</strong> {ad.location}</div>
-        </div>
-
-        <div className={styles.description}>
-          <h3>Description:</h3>
-          <p>{ad.description}</p>
-        </div>
-
-        <div className={styles.contact}>
-          <h4>Contact seller:</h4>
-          <p>Phone: <strong>{ad.phoneNumber}</strong></p>
-        </div>
-        <div className={styles.admin}>
-          { user && user.id === ad.sellerInfo ? (
-            <>
-              <Button as={Link} to={`/ad/edit/${ad._id}`} variant="success">Edit Ad</Button>
-              <Button  className="ms-3" variant="danger" onClick={handleShow}> 
-                Delete 
-              </Button>
-              <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                      <Modal.Title>Are you sure?</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>This operation is irreversible. Do you want to proceed?</Modal.Body>
-                  <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
-                          Close
-                      </Button>
-                      <Button variant="danger" onClick={handleRemove}> 
-                          Remove
-                      </Button>
-                  </Modal.Footer>
-              </Modal>
-            </>
-          ) : (<></>)}
-        </div>
-      </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default SingleAd;

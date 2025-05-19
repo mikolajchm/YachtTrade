@@ -27,7 +27,7 @@ exports.getById = async (req, res) => {
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
-}
+};
 
 
 exports.postAd = async (req, res) => {
@@ -72,8 +72,7 @@ exports.postAd = async (req, res) => {
     await newad.save();
     
     res.status(201).send({
-      message: 'Created!',
-      photos: newad.photos
+      newad 
     });
 
   } catch (err) {
@@ -84,20 +83,32 @@ exports.postAd = async (req, res) => {
 
 exports.deleteAd = async (req, res) => {
   try {
+    
+    const ad = await Ad.findById(req.params.id);
 
-    const adtodelete = await Ad.findById({ _id: req.params.id });
-
-    if (!adtodelete) {
+    if (!ad) {
       return res.status(404).send({ message: 'Ad not found with this ID' });
+    }
+
+  
+    for (const filename of ad.photos) {
+      const filepath = path.join(__dirname, '../public/uploads', filename);
+      if (fs.existsSync(filepath)) {
+        try {
+          fs.unlinkSync(filepath);
+        } catch (fileErr) {
+          console.warn(`Cannot delete file ${filepath}:`, fileErr);
+        }
+      }
     }
 
     await Ad.deleteOne({ _id: req.params.id });
 
-    res.status(201).send({ message: 'Deleted !'});
+    return res.status(200).send({ message: 'Deleted!' });
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    return res.status(500).send({ message: err.message });
   }
-}
+};
 
 
 exports.putAd = async (req, res) => {
@@ -121,26 +132,30 @@ exports.putAd = async (req, res) => {
     Object.assign(ad, req.body);
 
     await ad.save();
-    res.status(200).send({ message: 'Ad updated successfully' });
+    res.status(200).send({
+      message: 'Updated!'
+    });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
-}
+};
 
 
 exports.getSearchPharse = async (req, res) => {
   try {
 
-    const searchPharse = req.params.searchPharse;
-    const searchScore = await Ad.find( { title: { $regex: searchPharse}} );
+    const searchPhrase = req.params.searchPharse;
+    const ads = await Ad.find({
+      make: { $regex: searchPhrase, $options: 'i' } // ignoruj wielkość liter
+    });
 
-    if (!searchPharse) {
-      return res.status(404).send({ message: 'Ad not found' });
-    } 
-    
-    res.json(searchScore);
+    if (!ads.length) {
+      return res.status(404).json({ message: 'No ads found' });
+    }
+
+    return res.status(200).json(ads); 
 
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
-}
+};

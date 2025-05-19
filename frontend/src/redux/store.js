@@ -2,10 +2,12 @@ import { createStore, combineReducers } from 'redux';
 import initialState from './initialState';
 import adsReducer from './adsRedux';
 import userReducer from './userRedux';
+import searchReducer from './searchRedux';
 
 const subreducers = {
   ads: adsReducer,
-  user: userReducer
+  user: userReducer,
+  search: searchReducer
 }
 
 const reducer = combineReducers(subreducers);
