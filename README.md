@@ -80,7 +80,7 @@ Built as a portfolio project to demonstrate full‑stack skills (design, securit
 ## Getting started (local)
 
 ```bash
-git clone https://github.com/<your-user>/yachttrade.git
+git clone https://github.com/mikolajchm/yachttrade.git
 cd yachttrade
 
 # backend
