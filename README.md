@@ -85,10 +85,16 @@ cd yachttrade
 
 # backend
 cd ../backend
+rm -rf node_modules
+rm yarn.lock
+yarn install
 yarn install
 yarn start         # runs on http://localhost:8000
 
 # frontend
 cd ../frontend
+rm -rf node_modules
+rm yarn.lock
+yarn install
 yarn install
 yarn start            # runs on http://localhost:3000
