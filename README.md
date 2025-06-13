@@ -33,7 +33,7 @@ Built as a portfolio project to demonstrate full‑stack skills (design, securit
 | **Ads – CRUD**      | Create, read, update, delete (owner‑only) |
 | **Image upload**    | Multer → `/public/uploads` with MIME/extension validation |
 | **Search**          | `GET /ads/search/:phrase` – case‑insensitive regex |
-| **Authentication**  | Cookie session, Google OAuth 2.0, password hashing (bcrypt) |
+| **Authentication**  | Cookie session, password hashing (bcrypt), Google OAuth 2.0 *(in progress)*
 | **Responsive UI**   | Bootstrap 5 grid, carousel |
 | **UX**              | Inline form validation, toast errors, loading spinners |
 
