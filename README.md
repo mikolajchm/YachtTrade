@@ -77,22 +77,24 @@ Built as a portfolio project to demonstrate full‑stack skills (design, securit
 
 ---
 
-## Getting started (local)
-
-```bash
+# Clone the repo and go into it
 git clone https://github.com/mikolajchm/yachttrade.git
 cd yachttrade
 
-# backend
-cd ../backend
+# Backend (integrated with frontend)
+cd backend
 rm -rf node_modules
 rm yarn.lock
 yarn install
-yarn start         # runs on http://localhost:8000
 
-# frontend
+# Build frontend if not already built
 cd ../frontend
-rm -rf node_modules
-rm yarn.lock
 yarn install
-yarn start            # runs on http://localhost:3000
+yarn build          # creates production React build
+
+# Copy the frontend build to backend's public folder (if not done yet)
+cp -r build ../backend/public
+
+# Start the backend server
+cd ../backend
+yarn start          # runs the app at http://localhost:8000
