@@ -11,22 +11,15 @@ import Register from './components/pages/Register/Register';
 import Logout from './components/pages/Logout/Logout';
 import NotFound from './components/pages/NotFound/NotFound';
 import Footer from './components/views/Footer/Footer';
-import { API_URL } from './config';
-import { updateAds } from './redux/adsRedux';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 
 const App = () => {
 
-  const dispatch = useDispatch();
   const location = useLocation();
   const isFluid =
   location.pathname === '/' ||
   /^\/ad\/[^/]+$/.test(location.pathname) || 
   location.pathname === '*' ||
   location.pathname === '/search';
-
-  
 
   return (
     <main>

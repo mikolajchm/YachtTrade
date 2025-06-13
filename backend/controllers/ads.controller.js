@@ -141,10 +141,10 @@ exports.putAd = async (req, res) => {
 };
 
 
-exports.getSearchPharse = async (req, res) => {
+exports.getSearchPhrase = async (req, res) => {
   try {
 
-    const searchPhrase = req.params.searchPharse;
+    const searchPhrase = req.params.searchPhrase;
     const ads = await Ad.find({
       make: { $regex: searchPhrase, $options: 'i' } 
     });
