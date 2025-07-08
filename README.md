@@ -10,6 +10,32 @@ Built as a portfolio project to demonstrate full‑stack skills (design, securit
 
 ---
 
+## 📋 API Endpoints
+
+### 📢 Ads
+
+| Method | Endpoint                        | Auth Required | Description                                                                 |
+|--------|----------------------------------|----------------|-----------------------------------------------------------------------------|
+| GET    | `/ads`                          | ❌             | Fetches all ads                                                              |
+| GET    | `/ads/:id`                      | ❌             | Fetches a single ad by ID                                                   |
+| POST   | `/ads`                          | ✅             | Creates a new ad (supports up to 3 image uploads)                           |
+| PUT    | `/ads/:id`                      | ✅             | Updates an existing ad and replaces images if new ones are uploaded         |
+| DELETE | `/ads/:id`                      | ✅             | Deletes an ad by ID, including associated image files                       |
+| GET    | `/ads/search/:searchPhrase`     | ❌             | Searches ads by `make` field (case-insensitive partial match)              |
+
+---
+
+### 🔐 Auth
+
+| Method | Endpoint         | Auth Required | Description                                       |
+|--------|------------------|----------------|---------------------------------------------------|
+| POST   | `/register`      | ❌             | Registers a new user                              |
+| POST   | `/login`         | ❌             | Logs in a user and starts a session               |
+| GET    | `/user`          | ✅             | Returns current logged-in user's data             |
+| DELETE | `/logout`        | ✅             | Logs out the current user and destroys the session|
+
+---
+
 ## Demo
 
 | View                     | Screenshot |
